@@ -12,6 +12,19 @@ namespace PracticeDTORest.Utilidades
             CreateMap<AutorCreacionDTO, Autor>();
 
             CreateMap<Autor, AutorDTO>();
+
+
+            //LIBRO
+            CreateMap<Libro, LibroDTO>();
+
+            CreateMap<LibroCreacionDTO, Libro>();
+
+            //Comentario
+
+            CreateMap<ComentarioCreacionDTO , Comentario>();
+
+            CreateMap<Comentario, ComentarioDTO>();
+
         }
     }
 }

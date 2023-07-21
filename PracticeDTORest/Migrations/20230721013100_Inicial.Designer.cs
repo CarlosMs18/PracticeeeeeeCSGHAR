@@ -11,8 +11,8 @@ using PracticeDTORest;
 namespace PracticeDTORest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230720213514_Autores")]
-    partial class Autores
+    [Migration("20230721013100_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

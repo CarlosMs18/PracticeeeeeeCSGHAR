@@ -5,7 +5,7 @@
 namespace PracticeDTORest.Migrations
 {
     /// <inheritdoc />
-    public partial class Autores : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracticeDTORest;
 
@@ -11,9 +12,11 @@ using PracticeDTORest;
 namespace PracticeDTORest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230721015508_Libro")]
+    partial class Libro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,27 +42,6 @@ namespace PracticeDTORest.Migrations
                     b.ToTable("Autores");
                 });
 
-            modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contenido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LibroId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LibroId");
-
-                    b.ToTable("Comentarios");
-                });
-
             modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>
                 {
                     b.Property<int>("Id")
@@ -81,17 +63,6 @@ namespace PracticeDTORest.Migrations
                     b.HasIndex("AutorId");
 
                     b.ToTable("Libros");
-                });
-
-            modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
-                {
-                    b.HasOne("PracticeDTORest.Entidades.Libro", "Libro")
-                        .WithMany()
-                        .HasForeignKey("LibroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Libro");
                 });
 
             modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>

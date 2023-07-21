@@ -2,9 +2,12 @@
 
 namespace PracticeDTORest.DTOs
 {
-    public class AutorCreacionDTO
+    public class LibroCreacionDTO
     {
+
+
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public string Nombre { get; set; }  
+        [StringLength(maximumLength: 250)]
+        public string Titulo { get; set; }
     }
 }

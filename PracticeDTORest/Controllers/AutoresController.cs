@@ -9,12 +9,12 @@ namespace PracticeDTORest.Controllers
 
     [ApiController]
     [Route("api/autores")]
-    public class AutorController : ControllerBase
+    public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public AutorController(
+        public AutoresController(
             ApplicationDbContext context,
             IMapper mapper
             )
@@ -72,6 +72,20 @@ namespace PracticeDTORest.Controllers
             await context.SaveChangesAsync();
             return NoContent();
         }
-        
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var autor = await context.Autores.AnyAsync(autorDB => autorDB.Id == id);
+            if (!autor)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Autor() { Id = id });
+            await context.SaveChangesAsync();
+            return Ok();
+
+        }
     }
 }

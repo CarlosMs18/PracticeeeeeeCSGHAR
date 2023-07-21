@@ -17,7 +17,10 @@ namespace PracticeDTORest.Utilidades
             //LIBRO
             CreateMap<Libro, LibroDTO>();
 
-            CreateMap<LibroCreacionDTO, Libro>();
+            CreateMap<LibroCreacionDTO, Libro>()
+                .ForMember(libro => libro.AutoresLibros, opciones => opciones.MapFrom(MapAutoresLibros));
+                
+                
 
             //Comentario
 
@@ -26,5 +29,24 @@ namespace PracticeDTORest.Utilidades
             CreateMap<Comentario, ComentarioDTO>();
 
         }
+
+
+        private List<AutorLibro> MapAutoresLibros(LibroCreacionDTO libroCreacionDTO, Libro libro)
+        {
+            var resultado = new List<AutorLibro>();
+            if (libroCreacionDTO == null)
+            {
+                return resultado;
+            }
+
+            foreach(var autorId in libroCreacionDTO.AutoresIds)
+            {
+                resultado.Add(new AutorLibro { AutorId = autorId });    
+            }
+
+            return resultado;
+        }
+
+
     }
 }

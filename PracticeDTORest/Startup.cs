@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace PracticeDTORest
 {
@@ -16,11 +17,13 @@ namespace PracticeDTORest
         public void ConfigureServices(IServiceCollection services) {
 
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             services.AddDbContext<ApplicationDbContext>(options 
                 => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));   
         
+           
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 

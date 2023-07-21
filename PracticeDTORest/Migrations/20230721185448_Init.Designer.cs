@@ -12,8 +12,8 @@ using PracticeDTORest;
 namespace PracticeDTORest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230721015508_Libro")]
-    partial class Libro
+    [Migration("20230721185448_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,27 @@ namespace PracticeDTORest.Migrations
                     b.ToTable("Autores");
                 });
 
+            modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("Comentarios");
+                });
+
             modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>
                 {
                     b.Property<int>("Id")
@@ -65,6 +86,17 @@ namespace PracticeDTORest.Migrations
                     b.ToTable("Libros");
                 });
 
+            modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
+                {
+                    b.HasOne("PracticeDTORest.Entidades.Libro", "Libro")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Libro");
+                });
+
             modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>
                 {
                     b.HasOne("PracticeDTORest.Entidades.Autor", null)
@@ -75,6 +107,11 @@ namespace PracticeDTORest.Migrations
             modelBuilder.Entity("PracticeDTORest.Entidades.Autor", b =>
                 {
                     b.Navigation("Libros");
+                });
+
+            modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>
+                {
+                    b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618
         }

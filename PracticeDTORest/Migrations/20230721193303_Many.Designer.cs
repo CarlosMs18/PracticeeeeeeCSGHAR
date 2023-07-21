@@ -12,8 +12,8 @@ using PracticeDTORest;
 namespace PracticeDTORest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230721023545_Comentarios")]
-    partial class Comentarios
+    [Migration("20230721193303_Many")]
+    partial class Many
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,24 @@ namespace PracticeDTORest.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Autores");
+                });
+
+            modelBuilder.Entity("PracticeDTORest.Entidades.AutorLibro", b =>
+                {
+                    b.Property<int>("AutorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Orden")
+                        .HasColumnType("int");
+
+                    b.HasKey("AutorId", "LibroId");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("AutoresLibros");
                 });
 
             modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
@@ -86,10 +104,29 @@ namespace PracticeDTORest.Migrations
                     b.ToTable("Libros");
                 });
 
+            modelBuilder.Entity("PracticeDTORest.Entidades.AutorLibro", b =>
+                {
+                    b.HasOne("PracticeDTORest.Entidades.Autor", "Autor")
+                        .WithMany()
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PracticeDTORest.Entidades.Libro", "Libro")
+                        .WithMany("AutoresLibros")
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Libro");
+                });
+
             modelBuilder.Entity("PracticeDTORest.Entidades.Comentario", b =>
                 {
                     b.HasOne("PracticeDTORest.Entidades.Libro", "Libro")
-                        .WithMany()
+                        .WithMany("Comentarios")
                         .HasForeignKey("LibroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -107,6 +144,13 @@ namespace PracticeDTORest.Migrations
             modelBuilder.Entity("PracticeDTORest.Entidades.Autor", b =>
                 {
                     b.Navigation("Libros");
+                });
+
+            modelBuilder.Entity("PracticeDTORest.Entidades.Libro", b =>
+                {
+                    b.Navigation("AutoresLibros");
+
+                    b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618
         }

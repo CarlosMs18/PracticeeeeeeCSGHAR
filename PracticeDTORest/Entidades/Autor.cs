@@ -11,7 +11,7 @@ namespace PracticeDTORest.Entidades
 
         public List<Libro> Libros { get; set; } 
 
-        //public List<AutorLibro> AutorLibros { get; set; }   
+        public List<AutorLibro> AutoresLibros { get; set; }   
        
     }
 }

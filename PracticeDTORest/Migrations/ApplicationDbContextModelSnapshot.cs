@@ -89,6 +89,9 @@ namespace PracticeDTORest.Migrations
                     b.Property<int?>("AutorId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaPublicacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -104,7 +107,7 @@ namespace PracticeDTORest.Migrations
             modelBuilder.Entity("PracticeDTORest.Entidades.AutorLibro", b =>
                 {
                     b.HasOne("PracticeDTORest.Entidades.Autor", "Autor")
-                        .WithMany()
+                        .WithMany("AutoresLibros")
                         .HasForeignKey("AutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -140,6 +143,8 @@ namespace PracticeDTORest.Migrations
 
             modelBuilder.Entity("PracticeDTORest.Entidades.Autor", b =>
                 {
+                    b.Navigation("AutoresLibros");
+
                     b.Navigation("Libros");
                 });
 

@@ -13,14 +13,24 @@ namespace PracticeDTORest.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
 
         public AutoresController(
             ApplicationDbContext context,
-            IMapper mapper
+            IMapper mapper,
+            IConfiguration configuration
             )
         {
             this.context = context;
             this.mapper = mapper;
+            this.configuration = configuration;
+        }
+
+        [HttpGet("configuraciones")]
+        public ActionResult<string> ObtenerConfiguracion()
+        {
+            //return configuration["ConnectionStrings:defaultConnection"];
+            return configuration["apellido"];
         }
 
         [HttpGet]
@@ -32,15 +42,19 @@ namespace PracticeDTORest.Controllers
 
 
         [HttpGet("{id:int}", Name = "ObtenerPorAutor")]
-        public async Task<ActionResult<AutorDTO>> Get(int id)
+        public async Task<ActionResult<AutorDTOConLibros>> Get(int id)
         {
-            var autor = await context.Autores.FirstOrDefaultAsync(autorDB => autorDB.Id == id); 
+            var autor = await context.Autores
+                .Include(autorDB => autorDB.AutoresLibros)
+                .ThenInclude(autorLibroDB => autorLibroDB.Libro)
+                //.ThenInclude(autorLibroDB => autorLibroDB.Libro)
+                 .FirstOrDefaultAsync(autorDB => autorDB.Id == id); 
             if(autor == null)
             {
                 return NotFound();
             }
 
-            return mapper.Map<AutorDTO>(autor);
+            return mapper.Map<AutorDTOConLibros>(autor);
         }
 
         [HttpPost]

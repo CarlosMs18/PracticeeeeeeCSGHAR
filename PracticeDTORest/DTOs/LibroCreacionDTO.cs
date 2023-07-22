@@ -8,8 +8,10 @@ namespace PracticeDTORest.DTOs
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 250)]
+     
         public string Titulo { get; set; }
 
+        public DateTime FechaPublicacion { get; set; }
 
         public List<int> AutoresIds { get; set; }
         

@@ -17,7 +17,8 @@ namespace PracticeDTORest
         public void ConfigureServices(IServiceCollection services) {
 
 
-            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+            services.AddControllers().AddJsonOptions(x
+                => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles).AddNewtonsoftJson();
 
             services.AddDbContext<ApplicationDbContext>(options 
                 => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));   
@@ -35,9 +36,10 @@ namespace PracticeDTORest
             // Configure the HTTP request pipeline.
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+               
             }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

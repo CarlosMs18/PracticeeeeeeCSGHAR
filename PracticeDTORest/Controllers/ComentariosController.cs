@@ -55,5 +55,33 @@ namespace PracticeDTORest.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int libroId, int id, ComentarioCreacionDTO comentarioCreacionDTO)
+        {
+            var existeLibro = await context.Libros.AnyAsync(libroDB => libroDB.Id == libroId);
+            if (!existeLibro)
+            {
+                return NotFound($"No existe un libro por el identificador {libroId}");
+            }
+
+            var existeComentario = await context
+                .Comentarios.AnyAsync(comentarioDB => comentarioDB.Id == id);
+
+            if (!existeComentario)
+            {
+                return NotFound();
+            }
+
+            var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
+            comentario.Id = id;
+            comentario.LibroId = libroId;
+            context.Update(comentario);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+       
+
     }
 }

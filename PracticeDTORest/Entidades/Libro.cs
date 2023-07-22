@@ -13,6 +13,8 @@ namespace PracticeDTORest.Entidades
         //public int AutorId { get; set; }    
         //public Autor AutorCreador { get; set; }
 
+        public DateTime? FechaPublicacion { get; set; }   //nullable
+
         public List<Comentario> Comentarios { get; set; }
 
         public List<AutorLibro> AutoresLibros { get; set; }

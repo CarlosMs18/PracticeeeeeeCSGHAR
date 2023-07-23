@@ -33,7 +33,7 @@ namespace PracticeDTORest.Controllers
             return mapper.Map<List<LibroDTO>>(libro);
         }
  
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}",Name ="obtenerLibro")]
         public async Task<ActionResult<LibroDTOConAutores>> Get(int id)
         {
             var libro = await context.Libros
@@ -55,7 +55,7 @@ namespace PracticeDTORest.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost(Name ="crearLibro")]
         public async Task<ActionResult> Post(LibroCreacionDTO libroCreacionDTO)
         {
             if(libroCreacionDTO.AutoresIds == null)
@@ -78,12 +78,14 @@ namespace PracticeDTORest.Controllers
 
             context.Add(libro);
             await context.SaveChangesAsync();
-            return Ok();
+            var libroDTO = mapper.Map<LibroDTO>(libro);
+            return CreatedAtRoute("obtenerLibro", new { id = libro.Id }, libroDTO);
+            //return Ok();D
         }
 
 
 
-        [HttpPut("{id:int}")] //al actualizar libro es especial, ya que al crear un libro aparte de crear un libro
+        [HttpPut("{id:int}", Name = "actualizarLibro")] //al actualizar libro es especial, ya que al crear un libro aparte de crear un libro
                 //creamos a los autores que perteneceran a este
         public async Task<ActionResult> Put(int id, LibroCreacionDTO libroCreacionDTO)
         {
@@ -114,7 +116,7 @@ namespace PracticeDTORest.Controllers
             }
         }
 
-        [HttpPatch("{id:int}")]
+        [HttpPatch("{id:int}", Name ="patchLibro")]
         public async Task<ActionResult> Patch(int id, JsonPatchDocument<LibroPatchDTO> patchDocument)
         {
             if(patchDocument == null)
@@ -144,7 +146,7 @@ namespace PracticeDTORest.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}",Name="borrarLibro")]
         public async Task<ActionResult> Delete(int id)
         {
             var autor = await context.Libros.AnyAsync(libroDB => libroDB.Id == id);

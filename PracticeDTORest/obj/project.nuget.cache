@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sxrLGzHX0WVI/QO9G61ri+1z3n3PCftjdnTqqvt6CZew3IzlVM52r6c25YpvVi3qYmKF6Yz6Ai8shFbxan6Tlw==",
+  "dgSpecHash": "SwZm3PDB0R8ciWQco7mCzjME19bugNSFKmNqhylb73Kp6tMPWryBsCPZEadhO3oags6gzaSvVnhvYeHR96jgug==",
   "success": true,
   "projectFilePath": "C:\\Users\\jazmi\\source\\repos\\PracticeeeeeeCSGHAR\\PracticeDTORest\\PracticeDTORest.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\jazmi\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\jazmi\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.9\\microsoft.aspnetcore.cryptography.internal.7.0.9.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.9\\microsoft.aspnetcore.cryptography.keyderivation.7.0.9.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.9\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.9.nupkg.sha512",

@@ -1,4 +1,6 @@
-﻿namespace PracticeDTORest.Entidades
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace PracticeDTORest.Entidades
 {
     public class Comentario
     {
@@ -9,5 +11,8 @@
         public int LibroId { get; set; }
 
         public Libro Libro { get; set; }
+
+        public string UsuarioId { get; set; }
+        public IdentityUser Usuario { get; set; }    
     }
 }

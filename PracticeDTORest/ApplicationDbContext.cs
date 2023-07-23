@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PracticeDTORest.Entidades;
 
 namespace PracticeDTORest
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext :IdentityDbContext
     {
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
